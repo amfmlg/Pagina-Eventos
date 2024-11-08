@@ -9,4 +9,17 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(function() {
         document.querySelector('.presText').classList.add('animate');
     }, 200); // Delay to ensure the text animation is visible
+
+    // Intersection Observer to trigger animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('roll-in-bottom')) {
+                entry.target.classList.add('roll-in-bottom');
+            }
+        });
+    }, { threshold: 0.5 }); // Adjust threshold as needed
+
+    document.querySelectorAll('.frameDiv').forEach(frame => {
+        observer.observe(frame);
+    });
 });
